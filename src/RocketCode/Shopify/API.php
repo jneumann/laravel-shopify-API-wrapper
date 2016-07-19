@@ -247,7 +247,7 @@ class API
             CURLOPT_CUSTOMREQUEST   => strtoupper($request['METHOD']),
             CURLOPT_ENCODING        => '',
             CURLOPT_USERAGENT       => 'RocketCode Shopify API Wrapper',
-            CURLOPT_FAILONERROR     => $request['FAILONERROR'],
+            CURLOPT_FAILONERROR     => false,
             CURLOPT_VERBOSE         => $request['ALLDATA'],
             CURLOPT_HEADER          => 1
         );
@@ -307,6 +307,12 @@ class API
 	    if ($_ERROR['NUMBER'])
 	    {
 		    throw new \Exception('ERROR #' . $_ERROR['NUMBER'] . ': ' . $_ERROR['MESSAGE']);
+
+				$return = [
+					'error_number' => $_ERROR['NUMBER'],
+					'message' => $_ERROR['MESSAGE'],
+				];
+				return $return;
 	    }
 
 
